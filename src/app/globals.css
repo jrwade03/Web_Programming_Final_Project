@@ -14,8 +14,21 @@
   }
 }
 
+/* Ensure html and body take up the full screen */
+
+
+
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  /**font-family: Arial, Helvetica, sans-serif;**/
+  font-family: 'Inter';
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  /**background-image: url('./Images/freestocks-Y9mWkERHYCU-unsplash.jpg');
+  background-size: cover;
+  **/
 }
+
