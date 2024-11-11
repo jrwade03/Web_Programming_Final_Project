@@ -24,11 +24,13 @@ const EventForm = () => {
       guests: formData.guests.split(',').map(guest => guest.trim())
     };
 
+    // Retrieve existing events from localStorage or initialize an empty array
     const existingEvents = JSON.parse(localStorage.getItem('events') || '[]');
     
+    // Add the new event to the array
     existingEvents.push(newEvent);
     
-
+    // Save the updated events array back to localStorage
     localStorage.setItem('events', JSON.stringify(existingEvents));
 
     // Reset the form
