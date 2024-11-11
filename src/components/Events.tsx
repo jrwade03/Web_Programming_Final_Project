@@ -51,10 +51,11 @@ const Events = () => {
               className="w-4/5 bg-gray-200 ml-4 text-black p-2 rounded-md mb-4"
             />
           </div>
-
-          <Link href="/events/add" className="w-4/5 bg-black text-white p-2 rounded-md mb-4">
-            Add Event
+          
+          <Link href="/events/add" style={{ textAlign: 'center'}} className="flex items-center justify-center w-4/5 bg-black text-white p-2 rounded-md mb-4">
+              Add Event
           </Link>
+        
 
           <button
             onClick={handleLogout}
