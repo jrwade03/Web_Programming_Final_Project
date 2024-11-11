@@ -9,33 +9,36 @@ const Events = () => {
   const router = useRouter();
 
   useEffect(() => {
+    // Default events array
+    const defaultEvents = [
+      {
+        name: "Annual Meeting",
+        date: "2024-12-01",
+        time: "10:00 AM",
+        location: "Conference Room A",
+      },
+      {
+        name: "Team Building",
+        date: "2024-12-10",
+        time: "2:00 PM",
+        location: "Zoom",
+      },
+      {
+        name: "Charity Event",
+        date: "2024-12-10",
+        time: "4:00 PM",
+        location: "Piedmont Park",
+      },
+    ];
+
+    // Get events from localStorage or initialize with the default events
     const storedEvents = JSON.parse(localStorage.getItem('events') || '[]');
-    if (storedEvents.length > 0) {
-      setEvents(storedEvents);
-    } else {
-      // Default events array
-      const defaultEvents = [
-        {
-          name: "Annual Meeting",
-          date: "2024-12-01",
-          time: "10:00 AM",
-          location: "Conference Room A",
-        },
-        {
-          name: "Team Building",
-          date: "2024-12-10",
-          time: "2:00 PM",
-          location: "Zoom",
-        },
-        {
-            name: "Lunch w/ Manager",
-            date: "2024-12-10",
-            time: "12:00 PM",
-            location: "Olive Garden",
-          },
-      ];
-      setEvents(defaultEvents);
-    }
+    const combinedEvents = [...defaultEvents, ...storedEvents];
+
+    // Ensure no duplicates (by event name and date, adjust logic as needed)
+    const uniqueEvents = Array.from(new Set(combinedEvents.map(event => JSON.stringify(event)))).map(event => JSON.parse(event));
+
+    setEvents(uniqueEvents);
   }, []);
 
   const handleLogout = () => {
@@ -62,12 +65,14 @@ const Events = () => {
               className="w-4/5 bg-gray-200 ml-4 text-black p-2 rounded-md mb-4"
             />
           </div>
-          
-          <Link href="/events/add" style={{ textAlign: 'center'}} className="flex items-center justify-center w-4/5 bg-black text-white p-2 rounded-md mb-4">
-              Add Event
-          </Link>
-        
 
+          <Link
+            href="/events/add"
+            style={{ textAlign: "center" }}
+            className="flex items-center justify-center w-4/5 bg-black text-white p-2 rounded-md mb-4"
+          >
+            Add Event
+          </Link>
           <button
             onClick={handleLogout}
             className="mt-auto mb-4 w-4/5 bg-black text-white p-2 rounded-md"
