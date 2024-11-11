@@ -21,25 +21,6 @@ const Login = () => {
     }
   }
 
-  //const emailInput = (document.getElementById('email') as HTMLInputElement)?.value;
-  //const passwordInput = (document.getElementById('password') as HTMLInputElement)?.value;
-
-  /**function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    if(emailInput) {
-      setEmail(emailInput);
-      console.log("Email: ", emailInput);
-    } else {
-      alert("email not found");
-    }
-    if(passwordInput) {
-      setPassword(passwordInput);
-      console.log("Password: ", passwordInput);
-    } else {
-      alert("Password not found");
-    }
-  }
-  **/
 
 
 
@@ -51,7 +32,7 @@ const Login = () => {
       <div className="flex justify-center">
       <FontAwesomeIcon className="w-[50] h-[50]" icon={faCalendarCheck} />
       </div>
-      <h5 className="text-center text-xl">Welcome Back</h5> 
+      <h5 className="text-center text-xl">Planify</h5> 
       <div className="text-center">
       New to website name? <a className="text-blue-500 font-bold" href='#'>Sign up for free</a> 
       </div>
