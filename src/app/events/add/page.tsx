@@ -13,12 +13,11 @@ const EventForm = () => {
 
   const router = useRouter();
 
-  // Function to format time to include AM/PM
   const formatTimeWithAmPm = (time: string) => {
     const [hour, minute] = time.split(':');
     let hourInt = parseInt(hour);
     const amPm = hourInt >= 12 ? 'PM' : 'AM';
-    hourInt = hourInt % 12 || 12; // Convert to 12-hour format and handle 0 as 12
+    hourInt = hourInt % 12 || 12;
     return `${hourInt}:${minute} ${amPm}`;
   };
 
@@ -35,16 +34,12 @@ const EventForm = () => {
       guests: formData.guests.split(',').map(guest => guest.trim())
     };
 
-    // Retrieve existing events from localStorage or initialize an empty array
     const existingEvents = JSON.parse(localStorage.getItem('events') || '[]');
     
-    // Add the new event to the array
     existingEvents.push(newEvent);
     
-    // Save the updated events array back to localStorage
     localStorage.setItem('events', JSON.stringify(existingEvents));
 
-    // Reset the form
     setFormData({
       name: '',
       date: '',
