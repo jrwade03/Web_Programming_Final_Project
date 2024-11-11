@@ -13,13 +13,24 @@ const EventForm = () => {
 
   const router = useRouter();
 
+  // Function to format time to include AM/PM
+  const formatTimeWithAmPm = (time: string) => {
+    const [hour, minute] = time.split(':');
+    let hourInt = parseInt(hour);
+    const amPm = hourInt >= 12 ? 'PM' : 'AM';
+    hourInt = hourInt % 12 || 12; // Convert to 12-hour format and handle 0 as 12
+    return `${hourInt}:${minute} ${amPm}`;
+  };
+
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
+
+    const formattedTime = formatTimeWithAmPm(formData.time);
 
     const newEvent = {
       name: formData.name,
       date: formData.date,
-      time: formData.time,
+      time: formattedTime,
       location: formData.location,
       guests: formData.guests.split(',').map(guest => guest.trim())
     };
