@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarCheck } from "@fortawesome/free-regular-svg-icons";
 import Link from 'next/link'; // Import Link for routing
+import { signIn } from "next-auth/react";
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState<string>('');
@@ -16,13 +17,24 @@ const Login: React.FC = () => {
     if (!email || !password) {
       alert('Please enter both an email and a password');
       return;
-    } else {
+    } 
       console.log(email);
       console.log(password);
 
-      // Redirect to the Events page after successful login
-      router.push('/events');
-    }
+      const result = await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
+      });
+    
+      if (result?.error) {
+        alert(result.error);
+      } else {
+        console.log("Login successful:", result);
+        router.push("/events"); // Redirect to events page
+      }
+  
+    //}
   }
 
   return (
