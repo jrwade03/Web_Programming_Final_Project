@@ -7,13 +7,14 @@ import mongoose from "mongoose";
 export async function POST(request: NextRequest) {
   try {
     await connectMongoDB();
-    const { title, description, date, location, userId } = await request.json();
+    const { title, description, date, location, userId, time } = await request.json();
     const newEvent = new Event({
       title,
       description,
       date,
       location,
       userId: new mongoose.Types.ObjectId(userId),
+      time,
     });
     await newEvent.save();
     return NextResponse.json({ message: "Event created successfully" }, { status: 201 });

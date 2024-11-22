@@ -1,13 +1,15 @@
 "use client";
 import React, { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
+import { time } from "console";
 
-const EventForm = ({ onAddEvent }: { onAddEvent: (event: { name: string, date: string, location: string, guests: string[] }) => void }) => {
+const EventForm = ({ onAddEvent }: { onAddEvent: (event: { name: string, date: string, location: string, guests: string[], time: string}) => void }) => {
   const [formData, setFormData] = useState({
     eventName: "",
     date: "",
     location: "",
     guests: "",
+    time: "",
   });
 
   const router = useRouter();
@@ -21,6 +23,7 @@ const EventForm = ({ onAddEvent }: { onAddEvent: (event: { name: string, date: s
       date: formData.date,
       location: formData.location,
       guests: formData.guests.split(","), // Assume guests are entered as a comma-separated string
+      time: formData.time,
     };
 
     // Ensure the function is called correctly
@@ -34,6 +37,7 @@ const EventForm = ({ onAddEvent }: { onAddEvent: (event: { name: string, date: s
       date: "",
       location: "",
       guests: "",
+      time: "",
     });
 
     // Redirect to the Events page after submitting
