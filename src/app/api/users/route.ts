@@ -6,31 +6,42 @@ import bcrypt from "bcrypt";
 import { signIn, signOut } from "next-auth/react";
 
 export async function POST(request: NextRequest) {
-    const { email, password} = await request.json();
-    console.log("Attempting to connect to mongo");
-    await connectMongoDB();
-    console.log("connected to mongo")
-    console.log("Request Body:", email);
-    console.log("Request Body:", password);
-    console.log("Start findOne query");
-
-    const existingUser = await User.findOne({email});
-    console.log("getting here post");
-    console.log("done")
-    
-    if (!existingUser){
-    const saltRounds = 10;
-    const hashedPassword = await bcrypt.hash(password, saltRounds)
-    //try {
-    await User.create( { email, password: hashedPassword});
-    return NextResponse.json({ message: "Item added successfully"}, { status: 201})
-    } else {
-        console.log("user already there");
+    try {
+      const { email, password } = await request.json();
+      console.log("Attempting to connect to MongoDB...");
+      await connectMongoDB();
+      console.log("Connected to MongoDB");
+  
+      console.log("Checking for existing user...");
+      const existingUser = await User.findOne({ email });
+  
+      if (!existingUser) {
+        console.log("User not found. Creating new user...");
+        const saltRounds = 10;
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
+  
+        await User.create({ email, password: hashedPassword });
+  
+        console.log("New user created successfully.");
+        return NextResponse.json(
+          { message: "User added successfully" },
+          { status: 201 }
+        );
+      } else {
+        console.log("User already exists.");
+        return NextResponse.json(
+          { message: "User already exists" },
+          { status: 409 } // Conflict
+        );
+      }
+    } catch (error) {
+      console.error("Error in POST /api/users:", error);
+      return NextResponse.json(
+        { error: "Internal Server Error" },
+        { status: 500 }
+      );
     }
-    //} catch {
-      //  console.log("no work");
-   // }
-}
+  }
 
 // Get All Users
 export async function GET() {

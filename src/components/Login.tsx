@@ -25,18 +25,28 @@ const Login: React.FC = () => {
       console.log(email);
       console.log(password);
 
-      const result = await signIn("credentials", {
-        email,
-        password,
-        redirect: false,
-      });
-    
-      if (result?.error) {
-        alert("No account");
-      } else {
-        console.log("Login successful:", result);
-        router.push("/events"); // Redirect to events page
+      try {
+        const response = await fetch("/api/users", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+  
+        const result = await response.json();
+  
+        if (response.ok) {
+          console.log("Login successful:", result);
+          alert("Login successful!");
+          router.push("/events");
+          // Redirect or handle login success
+        } else {
+          console.error("Login failed:", result.error);
+        }
+      } catch (err) {
+        console.error("Unexpected error:", err);
       }
+       
   
     //}
   }
