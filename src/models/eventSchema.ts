@@ -11,7 +11,7 @@ interface Event extends Document {
 const eventSchema = new Schema<Event>({
   title: { type: String, required: true },
   description: { type: String },
-  date: { type: Date, required: true },
+  date: { type: String, required: true },
   location: { type: String, required: true },
   userId: { type: mongoose.Types.ObjectId, ref: "User", required: true },
   time: { type: String, required: true },
