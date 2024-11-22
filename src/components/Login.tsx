@@ -4,27 +4,53 @@ import { useRouter } from 'next/navigation';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarCheck } from "@fortawesome/free-regular-svg-icons";
 import Link from 'next/link'; // Import Link for routing
+import { signIn, signOut } from "next-auth/react";
 
+export async function doLogout() {
+  await signOut({redirectTo: "/"});
+}
+
+export async function doCredentialLogin(formData: FormData): Promise<any> {
+  const email = formData.get("email") as string;
+  const password = formData.get("password") as string;
+  //console.log("getting here");
+  try {
+      const response = await signIn("credentials", {
+          email,
+          password,
+          redirect: false,
+      });
+      console.log(response)
+      return response;
+  } catch (err: any) {
+      throw err;
+  }
+}
 const Login: React.FC = () => {
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
   const router = useRouter(); // Initialize the router
-
+  
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-
+  
     if (!email || !password) {
-      alert('Please enter both an email and a password');
+      alert("Please enter both an email and a password");
       return;
-    } else {
-      console.log(email);
-      console.log(password);
-
-      // Redirect to the Events page after successful login
-      router.push('/events');
     }
-  }
+    const formData = new FormData();
+    formData.append("email", email);
+    formData.append("password", password);
 
+    const response = await doCredentialLogin(formData);
+    //console.log(response);
+    if (response?.ok) {
+    router.push("/events")
+    } else {
+      alert(response.error);
+    }
+}
+  
   return (
     <div className="flex flex-col w-[500] mt-16 w-2/5 h-[500] bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
       <form onSubmit={handleSubmit} className="flex flex-col h-full space-y-5">

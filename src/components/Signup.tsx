@@ -22,6 +22,23 @@ const Signup = () => {
       console.log("Email:", email);
       console.log("Password:", password);
 
+      const response = await fetch("/api/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+      // Check for HTTP errors
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error("Server error:", errorText);
+        alert("This email is already associated with an account");
+        return;
+      }
+      const data = await response.json();
+      console.log("Server response", data)
+
       // future logic here, like sending data to a backend
       router.push("/events"); // Redirect to events page after successful sign-up
     }
