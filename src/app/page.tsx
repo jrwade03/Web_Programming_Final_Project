@@ -1,8 +1,9 @@
 import React from "react";
-import Login from "../components/Login";
+import Login from "../components/Signup";
+import Signup from "../components/Signup";
 
 const Home: React.FC = () => {
-  return <Login />;
+  return <Signup />;
 };
 
 export default Home;
