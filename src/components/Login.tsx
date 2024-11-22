@@ -21,34 +21,31 @@ const Login: React.FC = () => {
     if (!email || !password) {
       alert("Please enter both an email and a password");
       return;
-    } 
-      console.log(email);
-      console.log(password);
-
-      try {
-        const response = await fetch("/api/users", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
+    }
   
-        const result = await response.json();
+    try {
+      const response = await fetch("/api/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password, action: "login", }),
+      });
   
-        if (response.ok) {
-          console.log("Login successful:", result);
-          alert("Login successful!");
-          router.push("/events");
-          // Redirect or handle login success
-        } else {
-          console.error("Login failed:", result.error);
-        }
-      } catch (err) {
-        console.error("Unexpected error:", err);
+      const result = await response.json();
+  
+      if (response.ok) {
+        console.log("Login successful:", result);
+        alert("Login successful!");
+        router.push("/events"); // Redirect on successful login
+      } else {
+        console.error("Login failed:", result.error);
+        alert(result.error); // Display error message
       }
-       
-  
-    //}
+    } catch (err) {
+      console.error("Unexpected error:", err);
+      alert("An unexpected error occurred.");
+    }
   }
 
   return (

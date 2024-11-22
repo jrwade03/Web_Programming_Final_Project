@@ -27,7 +27,7 @@ const Signup = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email, password, action: "register", }),
       });
       // Check for HTTP errors
       if (!response.ok) {

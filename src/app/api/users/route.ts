@@ -7,37 +7,71 @@ import { signIn, signOut } from "next-auth/react";
 
 export async function POST(request: NextRequest) {
     try {
-      const { email, password } = await request.json();
-      console.log("Attempting to connect to MongoDB...");
       await connectMongoDB();
-      console.log("Connected to MongoDB");
   
-      console.log("Checking for existing user...");
-      const existingUser = await User.findOne({ email });
+      const { email, password, action } = await request.json();
   
-      if (!existingUser) {
-        console.log("User not found. Creating new user...");
+      if (!email || !password) {
+        return NextResponse.json(
+          { error: "Email and password are required." },
+          { status: 400 }
+        );
+      }
+  
+      if (action === "login") {
+        // Login logic
+        const user = await User.findOne({ email });
+  
+        if (!user) {
+          return NextResponse.json(
+            { error: "User not found." },
+            { status: 404 }
+          );
+        }
+  
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+  
+        if (!isPasswordValid) {
+          return NextResponse.json(
+            { error: "Invalid password." },
+            { status: 401 }
+          );
+        }
+  
+        return NextResponse.json(
+          { message: "Login successful!", userId: user._id },
+          { status: 200 }
+        );
+      } else if (action === "register") {
+        // Registration logic
+        const existingUser = await User.findOne({ email });
+  
+        if (existingUser) {
+          return NextResponse.json(
+            { error: "User already exists." },
+            { status: 409 }
+          );
+        }
+  
         const saltRounds = 10;
         const hashedPassword = await bcrypt.hash(password, saltRounds);
   
-        await User.create({ email, password: hashedPassword });
+        const newUser = await User.create({ email, password: hashedPassword });
   
-        console.log("New user created successfully.");
         return NextResponse.json(
-          { message: "User added successfully" },
+          { message: "User registered successfully!", userId: newUser._id },
           { status: 201 }
         );
       } else {
-        console.log("User already exists.");
         return NextResponse.json(
-          { message: "User already exists" },
-          { status: 409 } // Conflict
+          { error: "Invalid action." },
+          { status: 400 }
         );
       }
     } catch (error) {
-      console.error("Error in POST /api/users:", error);
+      console.error("Error in /api/users:", error);
       return NextResponse.json(
-        { error: "Internal Server Error" },
+        { error: "Internal server error." },
         { status: 500 }
       );
     }
