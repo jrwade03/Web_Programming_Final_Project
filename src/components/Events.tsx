@@ -86,7 +86,8 @@ const Events = () => {
             ) : events.length > 0 ? (
               events.map((event, index) => (
                 <EventCard
-                  key={index}
+                  key={event._id}
+                  id={event._id} // Pass the MongoDB ObjectId
                   date={event.date}
                   time={event.time}
                   location={event.location}
