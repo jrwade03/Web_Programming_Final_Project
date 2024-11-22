@@ -45,6 +45,12 @@ const Signup = () => {
   }
 
   return (
+    <div
+    className="flex items-center justify-center h-screen w-full bg-cover bg-center bg-no-repeat"
+    style={{
+      backgroundImage: "url('https://images.inc.com/uploaded_files/image/1920x1080/getty_479977238_253066.jpg')",
+    }}
+  >
     <div className="flex flex-col w-[500] mt-16 w-2/5 h-[500] bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
       <form onSubmit={handleSubmit} className="flex flex-col h-full space-y-5">
         <div className="flex justify-center">
@@ -89,6 +95,8 @@ const Signup = () => {
         </button>
       </form>
     </div>
+  </div>
+    
   );
 };
 
