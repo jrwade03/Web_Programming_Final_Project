@@ -32,4 +32,14 @@ export async function POST(request: NextRequest) {
    // }
 }
 
+// Get All Users
+export async function GET() {
+    try {
+      await connectMongoDB();
+      const users = await User.find({}, { email: 1 });
+      return NextResponse.json(users, { status: 200 });
+    } catch (error) {
+        return NextResponse.json({ error: (error as Error).message }, { status: 500 });
 
+    }
+}
