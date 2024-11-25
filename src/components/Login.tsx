@@ -63,7 +63,7 @@ const Login: React.FC = () => {
           </div>
           <h5 className="text-center text-xl">Welcome Back</h5>
           <div className="text-center">
-            New to website name?{" "}
+            New to Planify?{" "}
             <Link href="/signup" className="text-blue-500 font-bold">
               Sign up for free
             </Link>
