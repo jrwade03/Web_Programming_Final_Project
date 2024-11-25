@@ -36,7 +36,7 @@ const EventCard = ({ id, date, time, location, title }) => {
               pathname: "/events/edit",
               query: { id }, // Pass the event's unique ID
             }}
-            className="font-bold text-blue-500"
+            className="font-bold text-blue-500 hover:text-blue-700 hover:underline transition duration-200"
           >
             Edit
           </Link>

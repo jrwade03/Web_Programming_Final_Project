@@ -34,7 +34,7 @@ const EventForm = () => {
       date: formData.date,
       time: formattedTime,
       location: formData.location,
-      guests: formData.guests.split(",").map((guest) => guest.trim()),
+      guests: formData.guests,
     };
 
     try {
@@ -77,9 +77,15 @@ const EventForm = () => {
   };
 
   return (
+    <div
+      className="flex items-center justify-center h-screen w-full bg-cover bg-center bg-no-repeat"
+      style={{
+        backgroundImage: "url('https://images.inc.com/uploaded_files/image/1920x1080/getty_479977238_253066.jpg')",
+      }}
+    >
     <div className="flex flex-col justify-between inset-0 w-[500px] h-[700px] mt-10 bg-white shadow-lg rounded-lg p-6">
       <div className="mb-6">
-        <h2 className="text-xl font-bold">New Event Registration</h2>
+        <h2 className="text-xl font-bold">Add New Event</h2>
       </div>
       <form onSubmit={handleSubmit} className="flex flex-col gap-6 flex-1">
         <div className="flex flex-col gap-2">
@@ -134,12 +140,13 @@ const EventForm = () => {
         </div>
         <button
           type="submit"
-          className="rounded-lg h-[35] text-white bg-black w-full"
+          className="rounded-lg h-[35] text-white bg-black hover:bg-blue-600 w-full"
         >
           Create Event
         </button>
       </form>
       {message && <p className="mt-4 text-red-500 text-center">{message}</p>}
+    </div>
     </div>
   );
 };

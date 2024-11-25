@@ -8,6 +8,7 @@ const EditEventForm = () => {
     date: "",
     time: "",
     location: "",
+    guests: "",
   });
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -39,6 +40,7 @@ const EditEventForm = () => {
           date: event.date || "",
           time: event.time || "",
           location: event.location || "",
+          guests: event.guests || "",
         });
       } catch (err) {
         setError((err as Error).message);
@@ -124,6 +126,12 @@ const EditEventForm = () => {
   };
 
   return (
+    <div
+      className="flex items-center justify-center h-screen w-full bg-cover bg-center bg-no-repeat"
+      style={{
+        backgroundImage: "url('https://images.inc.com/uploaded_files/image/1920x1080/getty_479977238_253066.jpg')",
+      }}
+    >
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
       {loading ? (
         <p>Loading...</p>
@@ -175,6 +183,17 @@ const EditEventForm = () => {
                 className="w-full border rounded-md p-2"
               />
             </div>
+            <div>
+              <label className="block font-medium mb-1">Guests</label>
+              <input
+                type="text"
+                name="guests"
+                value={formData.guests}
+                onChange={handleChange}
+                placeholder="Enter guest names (comma separated)"
+                className="w-full border rounded-md p-2"
+              />
+            </div>
             <div className="flex justify-between gap-4">
               <button
                 type="submit"
@@ -193,6 +212,7 @@ const EditEventForm = () => {
           </form>
         </div>
       )}
+    </div>
     </div>
   );
 };
