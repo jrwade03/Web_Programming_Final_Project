@@ -16,7 +16,7 @@ const eventSchema = new Schema<Event>({
   location: { type: String, required: true },
   userId: { type: mongoose.Types.ObjectId, ref: "User", required: true },
   time: { type: String, required: true },
-  guests: { type: String, required: true },
+  guests: { type: String, required: false },
 });
 
 const Event = mongoose.models.Event || mongoose.model<Event>("Event", eventSchema);
