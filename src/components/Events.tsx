@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import EventCard from "./EventCard";
 import Link from "next/link";
+import { faCalendarCheck } from "@fortawesome/free-regular-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Events = () => {
   const [events, setEvents] = useState<any[]>([]);
@@ -42,13 +44,12 @@ const Events = () => {
       <div className="flex w-screen min-h-screen">
         {/* Sidebar */}
         <div className="flex flex-col items-center border-r border-gray-200 w-1/5 min-h-screen">
-          <div className="mb-4 pt-10">
-            <label className="w-full ml-12 rounded-md font-medium block">Search event</label>
-            <input
-              type="text"
-              className="w-4/5 bg-gray-200 ml-4 text-black p-2 rounded-md mb-4"
-              placeholder="Search..."
-            />
+        <div className="flex justify-center flex-col items-center mt-10">
+          <FontAwesomeIcon className="w-[100] h-[100]" icon={faCalendarCheck} />
+          <p className="mt-4 text-4xl font-playwrite text-gray-800 ">Planify</p>
+        </div>
+        <div className="mb-4 pt-10">
+            
           </div>
 
           <Link
