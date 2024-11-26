@@ -4,7 +4,11 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}"
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        playwrite: ['"Playwrite Australia NSW"', 'serif'], // Add the font family here
+      },
+    },
   },
   plugins: [],
 }
