@@ -17,7 +17,7 @@ const EventForm = ({ onAddEvent }: { onAddEvent: (event: { name: string, date: s
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
 
-    // Prepare new event data
+   
     const newEvent = {
       name: formData.eventName,
       date: formData.date,

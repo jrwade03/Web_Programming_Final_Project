@@ -2,16 +2,16 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarCheck } from "@fortawesome/free-regular-svg-icons";
-import { useRouter } from "next/navigation"; // Import useRouter for navigation
-import Link from 'next/link'; // Import Link for routing
+import { useRouter } from "next/navigation"; 
+import Link from 'next/link'; 
 
 const Signup = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-  const router = useRouter(); // Initialize the router for programmatic navigation
+  const router = useRouter(); 
 
-  // Handle the form submission
+ 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
