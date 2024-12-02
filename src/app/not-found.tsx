@@ -1,7 +1,7 @@
 
 export default function NotFound() {
     return (
-        <div className="flex items-center justify-center h-screen" style={{ backgroundColor: '#6B9080', width:"100vw" }}>
+        <div className="flex items-center justify-center h-screen" style={{ backgroundColor: '#43AA8B', width:"100vw" }}>
         <div className="text-center">
           <h1 className="mt-4 text-8xl font-playwrite text-gray-800 ">Oops!</h1>
           <p className="mt-4 text-4xl font-playwrite text-gray-800 ">
