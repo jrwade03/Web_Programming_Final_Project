@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 
+
 const EventCard = ({ id, date, time, location, title }) => {
   const defaultImg =
     "https://images.inc.com/uploaded_files/image/1920x1080/getty_479977238_253066.jpg";
@@ -22,7 +23,7 @@ const EventCard = ({ id, date, time, location, title }) => {
   return (
     <div className="flex items-center">
       <div className="w-full mt-4 space-y-4">
-        <div className="flex items-center bg-white p-4 rounded-md h-32 shadow-lg">
+        <div className="flex items-center bg-white p-4 rounded-xl h-32 shadow-md overflow-hidden tranisiton-all duration-300 hover:shadow-lg">
           <img src={defaultImg} className="h-full mr-4 object-cover" />
           <div className="flex-1">
             <p>Date: {date}</p>
